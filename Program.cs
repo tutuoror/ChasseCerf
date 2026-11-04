@@ -20,49 +20,53 @@ class Program
         - Afficher le bilan final de la chasse.
         */
 
-        int usedarrow = 0;
+        int arrow = 5;
         int hits = 0;
         string accuracy;
+        int miss = 0;
         Console.WriteLine("vous etes parti en chasse et vous tomber enfin sur un cerf");
                
 
-        while (hits < 3 && usedarrow < 5) 
+        while (hits < 3 && arrow > 0) 
         {
-            Console.WriteLine("vous allez tirer une fleche, va-t-elle toucher sa cible(Y/N) ?");
+            Console.WriteLine("Vous allez tirer une fleche, va-t-elle toucher sa cible(Y/N) ?" +
+                " il vous reste " + arrow + " fleches.");
             accuracy = Console.ReadLine();
 
-            if (accuracy == "Y")
+            if ((accuracy == "Y") || (accuracy == "y"))
             {
-                Console.WriteLine("vous tirez une fleche et touchez le cerf !");
+                Console.WriteLine("Vous tirez une fleche et touchez le cerf !");
 
-                usedarrow += 1;
                 hits += 1;
             }
-            else if (accuracy == "N")
+            else if ((accuracy == "N") || (accuracy == "n"))
             {
-                Console.WriteLine("vous ratez le cerf...");
+                Console.WriteLine("Vous ratez le cerf...");
 
-                usedarrow += 1;
+                miss++;
             }
             else if (accuracy == "Je veux me promener")
             {
-                Console.WriteLine("vous laissez le cerf tranquil et partez vous promenez..");
+                Console.WriteLine("Vous laissez le cerf tranquille et partez vous promenez..");
 
                 break;
             }    
             else
             {
-                Console.WriteLine("saisie invalide, veuillez selectionner l'un des choix proposer.");
+                Console.WriteLine("Saisie invalide, veuillez selectionner l'un des choix proposer.");
+                continue;
             }
+            arrow -= 1;
         }
         if (hits == 3)
         {
-            Console.WriteLine("vous aurez une bonne venaison fraiche pour le repas de ce soir!");
+            Console.WriteLine("Vous aurez une bonne venaison fraiche pour le repas de ce soir!");
         }
-        else if (usedarrow == 5)
+        else if (arrow == 0)
         {
-            Console.WriteLine("vous n'avez plus de fleche et ne pourrez pas goutez au cerf ce soir...");
+            Console.WriteLine("Vous n'avez plus de fleche et ne pourrez pas goutez au cerf ce soir...");
         }
-        Console.WriteLine("vous avez utilise " + usedarrow + " fleches et vous avez touche le cerf " + hits + " fois.");
+        Console.WriteLine("Il vous reste " + arrow + " fleches et vous avez touche le cerf " + hits + " fois." +
+            "\nVous l'avez rate " + miss + " fois.");
     }
 }
